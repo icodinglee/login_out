@@ -1,4 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './ui/App'
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
-render(<h1>redux tower demo</h1>, document.getElementById('root'));
+import { renderRoutes } from './routes';
+
+render(renderRoutes(), document.getElementById('root'));

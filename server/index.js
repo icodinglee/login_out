@@ -2,6 +2,7 @@ var express = require('express');
 var port=require('./config').port;
 var uri=require('./config').uri;
 var app = express();
+var cors = require('cors');
 var morgan = require('morgan');
 app.use(morgan('dev'));
 
@@ -9,6 +10,8 @@ var routes=require("./routes");
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 var User = require('./models/user.js');
 var mongoose = require('mongoose');

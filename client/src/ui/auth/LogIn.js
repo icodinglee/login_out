@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Radium from 'radium';
+import { login } from '../../redux/actions/authActions';
+import { connect } from 'react-redux';
 
 class LogIn extends Component {
   getStyles() {
@@ -42,13 +44,20 @@ class LogIn extends Component {
     };
   }
 
+  handleSubmit(e){
+    e.preventDefault();
+    let username = this.refs.username.getValue();
+    let password = this.refs.password.getValue();
+    this.props.login({username,password})
+  }
+
   render() {
     let styles = this.getStyles();
     return (
       <div style={styles.root}>
-        <form>
-          <TextField style={styles.textField} floatingLabelText="用户名" />
-          <TextField style={styles.textField} floatingLabelText="密码" type="password" />
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <TextField ref="username" style={styles.textField} floatingLabelText="用户名" />
+          <TextField ref="password" style={styles.textField} floatingLabelText="密码" type="password"  />
           <RaisedButton primary={true} style={styles.button} labelStyle={styles.label} type="submit" label="登录" />
         </form>
       </div>
@@ -56,4 +65,8 @@ class LogIn extends Component {
   }
 }
 
-export default Radium(LogIn);
+LogIn.propTypes = {
+  login: React.PropTypes.func.isRequired
+}
+
+export default connect(null, { login })(Radium(LogIn))

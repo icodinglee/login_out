@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Header from './Header';
 import Radium, { StyleRoot } from 'radium';
+
 class App extends Component {
   getChildContext() {
     return { muiTheme: getMuiTheme() };

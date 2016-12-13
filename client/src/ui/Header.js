@@ -11,7 +11,6 @@ class Header extends Component {
    this.props.logout();
   }
   render() {
-    console.log(this.props.auth)
     const { isAuthenticated, currentUser } = this.props.auth;
     const styles = {
       header: {
@@ -34,6 +33,7 @@ class Header extends Component {
         opacity: '.8',
         fontWeight: '600',
         fontSize: '1.5em',
+        paddingLeft: '20px',
         textDecoration: 'none',
         ':hover': {
           cursor: 'pointer',
@@ -49,6 +49,7 @@ class Header extends Component {
    );
    const LoginLink = (
      <div>
+       <Link to='/signup' style={styles.nav}>注册</Link>
        <Link to='/login' style={styles.nav}>登录</Link>
      </div>
    );

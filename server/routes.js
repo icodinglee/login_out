@@ -23,5 +23,16 @@ module.exports = function(app) {
       });
     });
   })
+  app.post('/auth/signup',function(req,res){
+    var user = new User();
+    user.username=req.body.username;
+    user.password=req.body.password;
+    user.save(function (err) {
+      if(err) {return console.log(err)}
+      return res.json({
+        token: generateToken({name: user.username}),
+        user: {name: user.username}
+      });
+    })
+  })
 }
-''

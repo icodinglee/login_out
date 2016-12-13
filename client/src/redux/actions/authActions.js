@@ -26,7 +26,7 @@ export function login(data){
         sessionStorage.setItem('jwtToken',token);
         sessionStorage.setItem('username',JSON.stringify(user));
         dispatch(setCurrentUser(user))
-        browserHistory.push('/')
+        browserHistory.push(`/`);
         console.log("SUCCESS")
       })
       .catch(err => {
@@ -41,5 +41,22 @@ export function logout() {
     sessionStorage.removeItem('user');
     dispatch(setCurrentUser({}));
     browserHistory.push(`/`);
+  }
+}
+
+
+export function signup(data) {
+  return dispatch => {
+    axios.post(`${Settings.host}/auth/signup`, data).then(response => {
+      const token = response.data.token;
+      const user = response.data.user;
+      sessionStorage.setItem('jwtToken', token);
+      sessionStorage.setItem('user', JSON.stringify(user));
+      dispatch(setCurrentUser(user));
+      browserHistory.push(`/`);
+      console.log('注册成功了！')
+    }).catch(error => {
+      handleError(error);
+    });
   }
 }

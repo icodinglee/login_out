@@ -27,7 +27,7 @@ export function login(data){
         sessionStorage.setItem('jwtToken',token);
         sessionStorage.setItem('username',JSON.stringify(user));
         dispatch(setCurrentUser(user.name))
-        browserHistory.push(`/`);
+        user.admin === true ? browserHistory.push(`/dashboard`) : browserHistory.push(`/`);
         console.log("登陆成功")
       })
       .catch(err => {
@@ -60,4 +60,17 @@ export function signup(data) {
       handleError(error);
     });
   }
+}
+
+
+function requireAuth(nextState, replace) {
+  if (!isAdmin()) {
+    replace('/login')
+  }
+}
+
+function isAdmin() {
+  if (!sessionStorage.getItem('jwtToken') && !sessionStorage.getItem('user')) return false;
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  return user.admin === true ? true : false
 }

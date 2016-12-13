@@ -9,6 +9,7 @@ import SignUp from './ui/auth/SignUp';
 import DashBoard from './ui/DashBoard';
 
 import { setCurrentUser } from './redux/actions/authActions';
+import { requireAuth } from './redux/actions/authActions';
 
 
 if (sessionStorage.jwtToken) {
@@ -22,7 +23,7 @@ export const renderRoutes = () => (
       <Route path='/' component={App}>
         <Route path='/login' component={LogIn} />
         <Route path='/signup' component={SignUp} />
-        <Route path='/dashboard' component={DashBoard}  />
+        <Route path='/dashboard' component={DashBoard} onEnter={requireAuth} />
       </Route>
     </Router>
   </Provider>

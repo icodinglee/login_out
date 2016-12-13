@@ -13,8 +13,8 @@ import { requireAuth } from './redux/actions/authActions';
 
 
 if (sessionStorage.jwtToken) {
-  const user = JSON.parse(sessionStorage.username);
-  store.dispatch(setCurrentUser(user));
+  const user = JSON.parse(sessionStorage.user);
+  store.dispatch(setCurrentUser(user.name));
 }
 
 export const renderRoutes = () => (

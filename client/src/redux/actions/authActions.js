@@ -25,7 +25,7 @@ export function login(data){
         const user = res.data.user;
         console.log(res.data.user)
         sessionStorage.setItem('jwtToken',token);
-        sessionStorage.setItem('username',JSON.stringify(user));
+        sessionStorage.setItem('user',JSON.stringify(user));
         dispatch(setCurrentUser(user.name))
         user.admin === true ? browserHistory.push(`/dashboard`) : browserHistory.push(`/`);
         console.log("登陆成功")
@@ -63,7 +63,8 @@ export function signup(data) {
 }
 
 
-function requireAuth(nextState, replace) {
+export function requireAuth(nextState, replace) {
+  console.log(sessionStorage)
   if (!isAdmin()) {
     replace('/login')
   }
@@ -71,6 +72,7 @@ function requireAuth(nextState, replace) {
 
 function isAdmin() {
   if (!sessionStorage.getItem('jwtToken') && !sessionStorage.getItem('user')) return false;
-  const user = JSON.parse(sessionStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.user);
+  console.log(user)
   return user.admin === true ? true : false
 }

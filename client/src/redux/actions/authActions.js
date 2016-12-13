@@ -27,7 +27,7 @@ export function login(data){
         sessionStorage.setItem('username',JSON.stringify(user));
         dispatch(setCurrentUser(user))
         browserHistory.push(`/`);
-        console.log("SUCCESS")
+        console.log("登陆成功")
       })
       .catch(err => {
           handleError(err)

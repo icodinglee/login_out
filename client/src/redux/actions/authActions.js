@@ -22,10 +22,10 @@ export function login(data){
   axios.post(`${Settings.host}/auth/login`,data)
       .then(res=>{
         const token = res.data.token ;
-        const user = res.data.user.name;
+        const user = res.data.user;
         sessionStorage.setItem('jwtToken',token);
         sessionStorage.setItem('username',JSON.stringify(user));
-        dispatch(setCurrentUser(user))
+        dispatch(setCurrentUser(user.name))
         browserHistory.push(`/`);
         console.log("登陆成功")
       })

@@ -23,6 +23,7 @@ export function login(data){
       .then(res=>{
         const token = res.data.token ;
         const user = res.data.user;
+        console.log(res.data.user)
         sessionStorage.setItem('jwtToken',token);
         sessionStorage.setItem('username',JSON.stringify(user));
         dispatch(setCurrentUser(user.name))
@@ -52,9 +53,7 @@ export function signup(data) {
       const user = response.data.user;
       sessionStorage.setItem('jwtToken', token);
       sessionStorage.setItem('user', JSON.stringify(user));
-      console.log(user)
       dispatch(setCurrentUser(user.name));
-      console.log(1)
       browserHistory.push(`/`);
       console.log('注册成功了！')
     }).catch(error => {

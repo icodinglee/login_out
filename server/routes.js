@@ -18,7 +18,7 @@ module.exports = function(app) {
         if (!isMatch) { return res.status(403).json({error: "密码无效！" }); }
         return res.json({
           token: generateToken({name: user.username}),
-          user: {name: user.username}
+          user: {name: user.username, admin:user.admin}
         });
       });
     });
@@ -31,7 +31,7 @@ module.exports = function(app) {
       if(err) {return console.log(err)}
       return res.json({
         token: generateToken({name: user.username}),
-        user: {name: user.username}
+        user: {name: user.username,admin:false}
       });
     })
   })

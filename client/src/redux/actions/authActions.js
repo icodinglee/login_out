@@ -26,7 +26,7 @@ export function login(data){
         console.log(res.data.user)
         sessionStorage.setItem('jwtToken',token);
         sessionStorage.setItem('user',JSON.stringify(user));
-        dispatch(setCurrentUser(user.name))
+        dispatch(setCurrentUser(user))
         user.admin === true ? browserHistory.push(`/dashboard`) : browserHistory.push(`/`);
         console.log("登陆成功")
       })
@@ -53,7 +53,7 @@ export function signup(data) {
       const user = response.data.user;
       sessionStorage.setItem('jwtToken', token);
       sessionStorage.setItem('user', JSON.stringify(user));
-      dispatch(setCurrentUser(user.name));
+      dispatch(setCurrentUser(user));
       browserHistory.push(`/`);
       console.log('注册成功了！')
     }).catch(error => {
@@ -70,9 +70,8 @@ export function requireAuth(nextState, replace) {
   }
 }
 
-function isAdmin() {
+ function isAdmin() {
   if (!sessionStorage.getItem('jwtToken') && !sessionStorage.getItem('user')) return false;
   const user = JSON.parse(sessionStorage.user);
-  console.log(user)
   return user.admin === true ? true : false
 }

@@ -43,7 +43,7 @@ class Header extends Component {
     };
     const LogoutLink = (
       <div>
-        <span style={{color: 'rgb(255,226, 0)', paddingRight: '15px'}}>{ currentUser }</span>
+        <span style={{color: 'rgb(255,226, 0)', paddingRight: '15px'}}>{ currentUser.name }</span>
         <Link to='/' style={styles.nav} onClick={this.logout.bind(this)}>退出</Link>
       </div>
    );

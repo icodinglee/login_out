@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import { Settings } from '../../settings';
+import PostActionList from './PostActionList';
+import { connect } from 'react-redux';
 
 class PostItem extends Component {
   getStyles() {
@@ -37,6 +39,7 @@ class PostItem extends Component {
   }
 
   render() {
+    console.log(this.props.user)
     const styles = this.getStyles();
     return (
       <div style={styles.root}>
@@ -48,9 +51,20 @@ class PostItem extends Component {
             {this.props.post.name}
           </div>
         </div>
+        { this.props.isAuthenticated && (this.props.user.admin === true) ? <PostActionList post={this.props.post} /> : '' }
       </div>
     );
   }
 }
 
-export default Radium(PostItem);
+PostItem.propTypes = {
+  isAuthenticated: React.PropTypes.bool.isRequired,
+  user: React.PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.currentUser
+})
+
+export default connect(mapStateToProps)(Radium(PostItem));

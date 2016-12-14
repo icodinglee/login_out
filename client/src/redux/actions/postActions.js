@@ -11,8 +11,12 @@ function handleError(error) {
 }
 
 export function newPost(data) {
+  let formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('content', data.content);
+  formData.append('post', data.file);
   return function(dispatch) {
-    axios.post(`${Settings.host}/posts`, data, {
+    axios.post(`${Settings.host}/posts`, formData, {
       headers: {'Authorization': sessionStorage.getItem('jwtToken')}
     }).then(response => {
       dispatch({ type: 'ADD_POST', post: response.data.post })

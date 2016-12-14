@@ -5,6 +5,7 @@ var PostSchema = new Schema(
   {
     name: { type: String },
     content: { type: String },
+    cover: { type: String }
   },
   { timestamps: true }
 );

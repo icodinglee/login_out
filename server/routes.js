@@ -3,6 +3,9 @@ var Post = require('./models/post');
 var jwt = require('jsonwebtoken');
 var secret = require('./config').secret;
 
+var multer = require('multer');
+var upload = multer({dest: './public/uploads/posts'});
+
 var generateToken = function(user) {
   return jwt.sign(user, secret, {
     expiresIn: 3000
@@ -61,8 +64,11 @@ module.exports = function(app) {
       });
     })
   })
-  app.post('/posts', requireAuth,function(req, res) {
+  app.post('/posts', requireAuth,upload.single('post'),function(req, res) {
    var post = new Post();
+   if(req.file && req.file.filename) {
+    post.cover = req.file.filename;
+   }
    post.name = req.body.name;
    post.content = req.body.content;
    post.save(function(err) {
@@ -74,7 +80,7 @@ module.exports = function(app) {
    });
  })
  app.get('/posts', function(req, res) {
-  Post.find({}, 'name', function(err, posts) {
+  Post.find({}, 'name cover', function(err, posts) {
     if (err) return console.log(err);
     res.json({
       posts: posts,

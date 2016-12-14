@@ -13,6 +13,9 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
 var User = require('./models/user.js');
 var mongoose = require('mongoose');
 

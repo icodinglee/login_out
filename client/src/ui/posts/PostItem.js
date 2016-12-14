@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import { Settings } from '../../settings';
 
 class PostItem extends Component {
   getStyles() {
@@ -22,6 +23,15 @@ class PostItem extends Component {
         fontWeight: '600',
         fontSize: '1.2em',
         textDecoration: 'none'
+      },
+      cover: {
+        borderBottom: 'solid 1px rgba(200, 215, 225, 0.5)',
+        maxHeight: '300px',
+        overflowY: 'hidden',
+        },
+      image: {
+        display: 'block',
+        width: '100%'
       }
     }
   }
@@ -30,6 +40,9 @@ class PostItem extends Component {
     const styles = this.getStyles();
     return (
       <div style={styles.root}>
+        <div style={styles.cover}>
+            <img src={`${Settings.host}/uploads/posts/${this.props.post.cover}`} style={styles.image}/>
+        </div>
         <div style={styles.content}>
           <div style={styles.name}>
             {this.props.post.name}

@@ -54,7 +54,7 @@ export function signup(data) {
       sessionStorage.setItem('jwtToken', token);
       sessionStorage.setItem('user', JSON.stringify(user));
       dispatch(setCurrentUser(user));
-      browserHistory.push(`/`);
+      browserHistory.push('/');
       console.log('注册成功了！')
     }).catch(error => {
       handleError(error);

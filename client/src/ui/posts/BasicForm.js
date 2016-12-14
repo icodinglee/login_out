@@ -34,11 +34,11 @@ class BasicForm extends Component {
     }
     return (
       <div style={styles.root}>
-        <TextField ref='name' floatingLabelText='标题' style={styles.textField} />
+        <TextField ref='name' floatingLabelText='标题' style={styles.textField} defaultValue={ this.props.post ? this.props.post.name : ''} />
         <div style={{marginTop: '15px', marginBottom: '15px'}}>
-          <TextField ref='content' floatingLabelText="内容" multiLine={true} rows={3} style={styles.textField} />
+          <TextField ref='content' floatingLabelText="内容" multiLine={true} rows={3} style={styles.textField} defaultValue={ this.props.post ? this.props.post.content : ''} />
         </div>
-        <CoverImageUpload tip="上传图片" handleImage={this.getImage.bind(this)}/>
+        <CoverImageUpload tip="上传图片" handleImage={this.getImage.bind(this)} image={this.props.post ? this.props.post.cover : ''}/>
       </div>
     );
   }

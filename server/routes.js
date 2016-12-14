@@ -67,6 +67,7 @@ module.exports = function(app) {
   app.post('/posts', requireAuth,upload.single('post'),function(req, res) {
    var post = new Post();
    if(req.file && req.file.filename) {
+     console.log(req.file)
     post.cover = req.file.filename;
    }
    post.name = req.body.name;
@@ -82,10 +83,37 @@ module.exports = function(app) {
  app.get('/posts', function(req, res) {
   Post.find({}, 'name cover', function(err, posts) {
     if (err) return console.log(err);
+    console.log(posts)
     res.json({
       posts: posts,
       message: '获取所有文章成功了！'
     });
   })
 })
+app.get('/posts/:post_id', function(req, res) {
+  Post.findById({_id: req.params.post_id}, function(err, post) {
+    if (err) return res.status(422).json({error: err.message});
+    res.json({ post: post })
+  })
+})
+
+app.put('/posts/:post_id', requireAuth, upload.single('post'), function(req, res) {
+  Post.findById({_id: req.params.post_id}, function(err, post) {
+    if (err) return res.status(422).json({error: err.message});
+    post.name = req.body.name;
+    post.content = req.body.content;
+    if(req.file && req.file.filename) {
+      post.cover = req.file.filename;
+    }
+    post.save(function(err) {
+      if (err) return res.status(422).json({error: err.message});
+      res.json({
+        post: post,
+        message: '文章更新成功了！'
+      });
+    });
+  });
+})
+
+
 }

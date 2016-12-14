@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import { Settings } from '../../settings';
 
 class CoverImageUpload extends Component {
   constructor(props){
     super(props);
     this.state={
-      image:""
+      image: this.props.image ? `${Settings.host}/uploads/posts/${this.props.image}` : ''
     }
   }
   handleChange(e){

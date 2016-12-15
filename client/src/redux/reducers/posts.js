@@ -1,4 +1,5 @@
 import map from 'lodash/fp/map';
+import filter from 'lodash/fp/filter';
 
 export default (state = [], action = {}) => {
   switch(action.type) {
@@ -13,6 +14,10 @@ export default (state = [], action = {}) => {
         } else {
           return post
         }
+      }, state)
+    case 'DELETE_POST':
+      return filter((post) => {
+        return post._id !== action.id
       }, state)
     default:
       return state

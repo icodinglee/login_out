@@ -4,6 +4,8 @@ import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import ActionLaunch from 'material-ui/svg-icons/action/launch';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import Radium from 'radium';
+import {connect} from 'react-redux';
+ import { deletePost } from '../../redux/actions/postActions'
 
 export class PostActionList extends Component {
   getStyles() {
@@ -38,6 +40,10 @@ export class PostActionList extends Component {
       }
     }
   }
+  handleClick(e){
+    console.log(123)
+    this.props.deletePost(this.props.post._id)
+  }
 
   render() {
     const styles = this.getStyles();
@@ -55,8 +61,8 @@ export class PostActionList extends Component {
             <span>查看</span>
           </Link>
         </div>
-        <div style={styles.action}>
-          <Link to='/dashboard' style={styles.a}>
+        <div style={styles.action} onClick={this.handleClick.bind(this)}>
+          <Link to='/dashboard' style={styles.a} >
             <ActionDelete color='#668eaa' style={styles.svg} />
             <span>删除</span>
           </Link>
@@ -66,4 +72,5 @@ export class PostActionList extends Component {
   }
 }
 
-export default Radium(PostActionList);
+
+export default connect(null, { deletePost })(Radium(PostActionList));

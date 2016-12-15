@@ -1,10 +1,10 @@
-# client
+### client
 - npm start
 
-# server
+### server
 - cd client/
 - mongod --dbpath=./data
 - node index.js
 
-# 管理员账户
+### 管理员账户
 - admin 666666

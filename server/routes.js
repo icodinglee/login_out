@@ -115,5 +115,17 @@ app.put('/posts/:post_id', requireAuth, upload.single('post'), function(req, res
   });
 })
 
+app.delete('/posts/:post_id', requireAuth, function(req, res) {
+  var id = req.params.post_id;
+  Post.findById({_id: id}, function(err, post) {
+    post.remove(function(err){
+      if (err) return res.status(422).json({error: err.message});
+      res.json({
+        id: id,
+        message: '文章已经移除了！'
+      });
+    });
+  });
+})
 
 }

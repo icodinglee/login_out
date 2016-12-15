@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { Settings } from '../../settings';
+import { AlertError,AlertSuccess } from '../../shared/Alert';
 
 function handleError(error) {
   if (error.response) {
-    console.log(error.response.data.error);
+    AlertError(error.response.data.error);
   } else {
     console.log(error);
   }
@@ -21,7 +22,7 @@ export function newPost(data) {
     }).then(response => {
       dispatch({ type: 'ADD_POST', post: response.data.post })
       browserHistory.push('/dashboard');
-      console.log(response.data.message)
+      AlertSuccess(response.data.message)
     }).catch(error => {
       handleError(error);
     });
@@ -63,7 +64,7 @@ export function editPost(data, id) {
     }).then(response => {
       dispatch({ type: 'EDIT_POST', post: response.data.post })
       browserHistory.push('/dashboard');
-      console.log(response.data.message)
+      AlertSuccess(response.data.message)
     }).catch(error => {
       handleError(error);
     });
@@ -77,7 +78,7 @@ export function deletePost(id) {
     }).then(response => {
       dispatch({ type: 'DELETE_POST', id: response.data.id })
       browserHistory.push('/dashboard');
-      //console.log(response.data.message)
+      AlertSuccess(response.data.message)
     }).catch(error => {
       handleError(error);
     });

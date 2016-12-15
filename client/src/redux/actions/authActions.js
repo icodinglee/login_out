@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Settings } from '../../settings';
 import { browserHistory } from 'react-router';
+import { AlertError,AlertSuccess } from '../../shared/Alert';
 
 export function setCurrentUser(user) {
   return {
@@ -11,7 +12,7 @@ export function setCurrentUser(user) {
 
 function handleError(err) {
   if(err.response){
-    console.log(err.response.data.error)
+    AlertError(err.response.data.error)
   }else {
     console.log(err)
   }
@@ -28,7 +29,7 @@ export function login(data){
         sessionStorage.setItem('user',JSON.stringify(user));
         dispatch(setCurrentUser(user))
         user.admin === true ? browserHistory.push(`/dashboard`) : browserHistory.push(`/`);
-        console.log("登陆成功")
+        AlertSuccess("登陆成功")
       })
       .catch(err => {
           handleError(err)
@@ -55,7 +56,7 @@ export function signup(data) {
       sessionStorage.setItem('user', JSON.stringify(user));
       dispatch(setCurrentUser(user));
       browserHistory.push('/');
-      console.log('注册成功了！')
+      AlertSuccess('注册成功了！')
     }).catch(error => {
       handleError(error);
     });

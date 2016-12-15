@@ -3,6 +3,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Header from './Header';
 import Radium, { StyleRoot } from 'radium';
 
+import Alert from 'react-s-alert';
+
+
+
 class App extends Component {
   getChildContext() {
     return { muiTheme: getMuiTheme() };
@@ -25,6 +29,7 @@ class App extends Component {
         <div style={styles.root}>
           <Header />
           { this.props.children }
+          <Alert stack={{limit: 3}} html={true}/>
         </div>
      </StyleRoot>
     );

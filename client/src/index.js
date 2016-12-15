@@ -6,4 +6,7 @@ injectTapEventPlugin();
 
 import { renderRoutes } from './routes';
 
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+
 render(renderRoutes(), document.getElementById('root'));

@@ -30,7 +30,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: path.join(__dirname, 'src'),
         loader: 'style-loader!css-loader'
       }
     ]

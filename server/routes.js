@@ -53,6 +53,11 @@ module.exports = function(app) {
     });
   })
   app.post('/auth/signup',function(req,res){
+    User.findOne({ username: req.body.username }, function(err, user) {
+      if(user){
+        res.status(403).json({error: '用户名已存在！'})
+      }
+    })
     var user = new User();
     user.username=req.body.username;
     user.password=req.body.password;

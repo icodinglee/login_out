@@ -40,7 +40,6 @@ class PostItem extends Component {
   }
 
   render() {
-    console.log(this.props.user)
     const styles = this.getStyles();
     return (
       <div style={styles.root}>

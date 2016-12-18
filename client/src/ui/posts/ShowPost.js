@@ -14,6 +14,8 @@ class ShowPost extends Component {
       cover: {
         backgroundImage: isEmpty(this.props.post) ? 'none' : `url(${Settings.host}/uploads/posts/${this.props.post.cover})`,
         height: '300px',
+        marginRight:"1%",
+        marginLeft:"1%",
         position: 'relative',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -21,7 +23,7 @@ class ShowPost extends Component {
       },
       container: {
         maxWidth: '960px',
-        margin: '26px auto 0'
+        margin: '26px 8% 0'
       },
       name: {
         fontSize: '28px',

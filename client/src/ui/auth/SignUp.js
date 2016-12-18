@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Radium from 'radium';
 import { connect } from 'react-redux';
 import { signup } from '../../redux/actions/authActions'
-
+import { AlertError }from '../../shared/Alert'
 class SignUp extends Component {
   getStyles() {
     return {
@@ -50,7 +50,7 @@ class SignUp extends Component {
     let password = this.refs.password.getValue();
     let confirmPassword = this.refs.confirmPassword.getValue();
      if(password !== confirmPassword) {
-       console.log('密码不匹配');
+       AlertError('前后密码输入不一致');
        return;
      }
     this.props.signup({username,password})

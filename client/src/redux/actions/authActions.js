@@ -24,7 +24,6 @@ export function login(data){
       .then(res=>{
         const token = res.data.token ;
         const user = res.data.user;
-        console.log(res.data.user)
         sessionStorage.setItem('jwtToken',token);
         sessionStorage.setItem('user',JSON.stringify(user));
         dispatch(setCurrentUser(user))
@@ -65,7 +64,6 @@ export function signup(data) {
 
 
 export function requireAuth(nextState, replace) {
-  console.log(sessionStorage)
   if (!isAdmin()) {
     replace('/login')
   }
